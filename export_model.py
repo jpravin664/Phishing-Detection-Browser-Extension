@@ -27,7 +27,8 @@ export class RandomForestClassifier {
 }
 '''
 
-# Write all at once
+# Write all at once for confirmation 
 with open(ext_path, 'w') as f:
     f.write(js_core + '\n' + template)
 print(f"✅ Model exported with wrapper to {ext_path}")
+
