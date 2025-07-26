@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Real-Time Phishing Detector",
+  "name": "Real-Time Phishing Detector Ver 2",
   "short_name": "PhishGuard",
   "version": "1.0.0",
   "description": "Detects and blocks phishing sites in real time using Google Safe Browsing, VirusTotal, and a local ML fallback.",
@@ -14,7 +14,9 @@
   "permissions": [
     "storage",
     "tabs",
-    "webNavigation"
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
  
   ],
   "host_permissions": [
@@ -43,7 +45,10 @@
   },
   "web_accessible_resources": [
   {
-    "resources": ["icons/warning.png"],
+    "resources": ["icons/warning.png",
+                  "phishOverlay.html" 
+           ],
+    
     "matches": ["<all_urls>"]
   }
 ]
