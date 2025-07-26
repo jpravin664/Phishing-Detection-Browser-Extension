@@ -1,3 +1,4 @@
 *.py linguist-detectable=true
 *.html linguist-detectable=true
 data/* linguist-detectable=false
+utils/* linguist-detectable=false
