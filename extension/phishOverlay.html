@@ -13,285 +13,602 @@
 
             
         <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&display=swap');
 
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-          #phish-block-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0, 0, 0, 0.9); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            z-index: 2147483647; 
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            padding: 1rem;
-            box-sizing: border-box;
-          }
-          
-          #phish-block-modal { 
-            background: #ffffff; 
-            padding: 2.5rem; 
-            border-radius: 16px; 
-            max-width: 560px; 
-            width: 100%; 
-            text-align: center; 
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-            transform-origin: center bottom;
-            position: relative;
-            overflow: hidden;
-          }
-          
-          #phish-block-modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #D32F2F 0%, #F44336 100%);
-          }
-          
-          .phish-block-header {
-            margin-bottom: 2rem;
-            position: relative;
-          }
-          
-          .phish-block-icon-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-          }
-          
-          .phish-block-icon {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 2;
-          }
-          
-          .phish-block-pulse {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(211, 47, 47, 0.2);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            z-index: 1;
-          }
-          
-          #phish-block-modal h1 { 
-            margin: 0 0 0.25rem; 
-            color: #1A1A1A; 
-            font-size: 1.75rem; 
-            font-weight: 700;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-          }
-          
-          .phish-block-subtitle {
-            color: #666;
-            font-size: 1rem;
-            margin: 0;
-            font-weight: 500;
-          }
-          
-          .phish-block-content {
-            text-align: left;
-            margin-bottom: 2.5rem;
-          }
-          
-          .phish-block-url-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #FFF5F5;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #D32F2F;
-          }
-          
-          .phish-block-url {
-            color: #D32F2F;
-            word-break: break-all;
-            font-family: 'SF Mono', 'Roboto Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 500;
-          }
-          
-          .phish-block-warning {
-            background: #FFF8E6;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-          }
-          
-          .phish-block-warning-icon {
-            background: #FFC107;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-          }
-          
-          .phish-block-warning-content h3 {
-            margin: 0 0 0.5rem;
-            color: #E65100;
-            font-size: 1.1rem;
-            font-weight: 600;
-          }
-          
-          .phish-block-warning-content p {
-            margin: 0;
-            color: #5C3B00;
-            font-size: 0.95rem;
-            line-height: 1.5;
-          }
-          
-          .phish-block-recommendation {
-            background: #F5F9F5;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #4CAF50;
-          }
-          
-          .phish-block-recommendation-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-          }
-          
-          .phish-block-recommendation h3 {
-            margin: 0;
-            color: #2E7D32;
-            font-size: 1.1rem;
-            font-weight: 600;
-          }
-          
-          .phish-block-recommendation p {
-            margin: 0;
-            color: #1B5E20;
-            font-size: 0.95rem;
-            line-height: 1.5;
-          }
-          
-          .phish-block-buttons { 
-            display: flex; 
-            flex-direction: column;
-            gap: 1rem;
-          }
-          
-          .phish-block-button-group {
-            display: flex;
-            gap: 0.75rem;
-          }
-          
-          .phish-block-buttons button { 
-            padding: 1rem 1.5rem; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            flex: 1;
-          }
-          
-          .phish-block-primary-btn {
-            background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
-          }
-          
-          .phish-block-primary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(211, 47, 47, 0.4);
-          }
-          
-          .phish-block-primary-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
-          }
-          
-          .phish-block-secondary-btn {
-            background: #fff;
-            color: #666;
-            border: 1px solid #E0E0E0 !important;
-          }
-          
-          .phish-block-secondary-btn:hover {
-            background: #f9f9f9;
-            border-color: #BDBDBD !important;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          }
-          
-          .phish-block-tertiary-btn {
-            background: transparent;
-            color: #1976D2;
-            border: 1px solid rgba(25, 118, 210, 0.3) !important;
-          }
-          
-          .phish-block-tertiary-btn:hover {
-            background: rgba(25, 118, 210, 0.08);
-            color: #0D47A1;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
-          }
-          
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          
-          @keyframes slideUp {
-            from { 
-              opacity: 0;
-              transform: translateY(40px) scale(0.95);
-            }
-            to { 
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
-          
-          @keyframes pulse {
-            0% {
-              transform: scale(1);
-              opacity: 0.8;
-            }
-            70% {
-              transform: scale(1.3);
-              opacity: 0;
-            }
-            100% {
-              transform: scale(1);
-              opacity: 0;
-            }
-          }
+#phish-block-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(88, 28, 135, 0.4) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(219, 39, 119, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 40% 40%, rgba(239, 68, 68, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(7, 13, 25, 0.99) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483647;
+  backdrop-filter: blur(20px) saturate(1.8) brightness(0.7);
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#phish-block-overlay::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, 
+              rgba(239, 68, 68, 0.15) 0deg,
+              rgba(219, 39, 119, 0.1) 90deg,
+              rgba(88, 28, 135, 0.15) 180deg,
+              rgba(59, 130, 246, 0.1) 270deg,
+              rgba(239, 68, 68, 0.15) 360deg);
+  animation: rotate 20s linear infinite, pulseBackground 6s ease-in-out infinite alternate;
+  filter: blur(60px);
+}
+
+#phish-block-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+      rgba(239, 68, 68, 0.06), transparent 40%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#phish-block-modal {
+  background: 
+    linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  padding: 2rem;
+  border-radius: 24px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 24px 48px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(239, 68, 68, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) both,
+             float 8s ease-in-out infinite;
+  transform-origin: center bottom;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+#phish-block-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, 
+              #ef4444 0%, 
+              #f97316 25%,
+              #eab308 50%, 
+              #f97316 75%,
+              #ef4444 100%);
+  background-size: 400% 100%;
+  animation: gradientFlow 4s ease-in-out infinite;
+}
+
+#phish-block-modal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(219, 39, 119, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.phish-block-header {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.phish-block-icon-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.5))
+          drop-shadow(0 6px 24px rgba(0, 0, 0, 0.3));
+}
+
+.phish-block-icon {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.phish-block-pulse {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: conic-gradient(from 0deg, 
+              rgba(239, 68, 68, 0.4) 0deg,
+              rgba(251, 146, 60, 0.3) 90deg,
+              rgba(239, 68, 68, 0.4) 180deg,
+              rgba(220, 38, 127, 0.3) 270deg,
+              rgba(239, 68, 68, 0.4) 360deg);
+  border-radius: 50%;
+  animation: pulse 3s infinite cubic-bezier(0.4, 0, 0.6, 1),
+             rotate 8s linear infinite;
+  z-index: 1;
+  filter: blur(20px);
+}
+
+.phish-block-pulse::after {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, 
+              rgba(239, 68, 68, 0.6) 0%, 
+              transparent 70%);
+  border-radius: 50%;
+  animation: innerPulse 2s infinite alternate;
+}
+
+#phish-block-modal h1 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.phish-block-subtitle {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.phish-block-content {
+  text-align: left;
+  margin-bottom: 2.5rem;
+}
+
+.phish-block-url-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: 
+    linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 127, 0.1) 100%);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.phish-block-url-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+  animation: glowBar 2s ease-in-out infinite alternate;
+}
+
+.phish-block-url-container:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(220, 38, 127, 0.15) 100%);
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.2);
+}
+
+.phish-block-url {
+  color: #fca5a5;
+  word-break: break-all;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.phish-block-warning {
+  background: 
+    linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2.5rem 0;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.phish-block-warning::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+}
+
+.phish-block-warning:hover {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.15) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.phish-block-warning-icon {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #451a03;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 
+    0 4px 16px rgba(245, 158, 11, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: warningPulse 3s ease-in-out infinite;
+}
+
+.phish-block-warning-content h3 {
+  margin: 0 0 1rem;
+  color: #fbbf24;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.phish-block-warning-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.phish-block-recommendation {
+  background: 
+    linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(21, 128, 61, 0.1) 100%);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.phish-block-recommendation::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+}
+
+.phish-block-recommendation:hover {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(21, 128, 61, 0.15) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.phish-block-recommendation-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.phish-block-recommendation h3 {
+  margin: 0;
+  color: #4ade80;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.phish-block-recommendation p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.phish-block-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.phish-block-button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.phish-block-buttons button {
+  padding: 1.25rem 1.75rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: -0.01em;
+}
+
+.phish-block-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+              rgba(255, 255, 255, 0.1) 0%, 
+              rgba(255, 255, 255, 0.05) 50%,
+              rgba(255, 255, 255, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.phish-block-buttons button:hover::before {
+  opacity: 1;
+}
+
+.phish-block-primary-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+  color: #fff;
+  box-shadow: 
+    0 8px 24px rgba(239, 68, 68, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  font-weight: 700;
+}
+
+.phish-block-primary-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 16px 40px rgba(239, 68, 68, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.phish-block-primary-btn:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 
+    0 8px 24px rgba(239, 68, 68, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.phish-block-secondary-btn {
+  background: linear-gradient(135deg, rgba(71, 85, 105, 0.8) 0%, rgba(51, 65, 85, 0.9) 100%);
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.phish-block-secondary-btn:hover {
+  background: linear-gradient(135deg, rgba(71, 85, 105, 0.9) 0%, rgba(51, 65, 85, 1) 100%);
+  border-color: rgba(148, 163, 184, 0.5) !important;
+  color: #f1f5f9;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.phish-block-tertiary-btn {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.15) 100%);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
+}
+
+.phish-block-tertiary-btn:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(37, 99, 235, 0.25) 100%);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 32px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to { 
+    opacity: 1;
+    backdrop-filter: blur(20px) saturate(1.8) brightness(0.7);
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(80px) scale(0.9) rotateX(10deg);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes innerPulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulseBackground {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1.3) rotate(45deg);
+    opacity: 0.05;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotateX(1deg);
+  }
+  66% {
+    transform: translateY(-4px) rotateX(-1deg);
+  }
+}
+
+@keyframes warningPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 16px rgba(245, 158, 11, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 8px 24px rgba(245, 158, 11, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glowBar {
+  0% {
+    box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.5);
+  }
+  100% {
+    box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.8);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #phish-block-modal {
+    padding: 2.5rem;
+    border-radius: 24px;
+  }
+  
+  #phish-block-modal h1 {
+    font-size: 1.875rem;
+  }
+  
+  .phish-block-button-group {
+    flex-direction: column;
+  }
+  
+  .phish-block-buttons button {
+    padding: 1.25rem 1.5rem;
+  }
+}
         </style>
   
     <div id="phish-block-overlay">
@@ -299,9 +616,80 @@
           <div class="phish-block-header">
             <div class="phish-block-icon-container">
               <svg class="phish-block-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#D32F2F"/>
-                <path d="M12 7C11.45 7 11 7.45 11 8V13C11 13.55 11.45 14 12 14C12.55 14 13 13.55 13 13V8C13 7.45 12.55 7 12 7ZM11 16C11 15.45 11.45 15 12 15C12.55 15 13 15.45 13 16C13 16.55 12.55 17 12 17C11.45 17 11 16.55 11 16Z" fill="#D32F2F"/>
-              </svg>
+  <defs>
+    <linearGradient id="warningGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#D32F2F"/>
+    </linearGradient>
+    
+    <!-- Glow filter for pulsing effect -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <!-- Animation definitions -->
+    <animateTransform 
+      id="pulse" 
+      attributeName="transform" 
+      type="scale"
+      values="1;1.05;1" 
+      dur="1.5s" 
+      repeatCount="indefinite"
+    />
+    
+    <animate 
+      id="glowAnimation"
+      attributeName="opacity"
+      values="0.7;1;0.7"
+      dur="1.5s"
+      repeatCount="indefinite"
+    />
+    
+    <animate 
+      id="exclamationBlink"
+      attributeName="fill"
+      values="#fff;#ffeb3b;#fff"
+      dur="0.8s"
+      repeatCount="indefinite"
+    />
+  </defs>
+  
+  <!-- Outer circle with pulse animation -->
+  <circle cx="12" cy="12" r="10" fill="url(#warningGradient)" stroke="#B71C1C" stroke-width="1">
+    <animate attributeName="r" values="10;11;10" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Inner glow circle -->
+  <circle cx="12" cy="12" r="8" fill="none" stroke="#FFCDD2" stroke-width="2" stroke-opacity="0.5" filter="url(#glow)">
+    <animate attributeName="r" values="8;9;8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+    <animate attributeName="stroke-opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Exclamation mark with blinking animation -->
+  <g transform="translate(0, -1)">
+    <path d="M12 6C11.45 6 11 6.45 11 7V12C11 12.55 11.45 13 12 13C12.55 13 13 12.55 13 12V7C13 6.45 12.55 6 12 6Z" 
+          fill="#FFF" stroke="#FFF" stroke-width="0.5">
+      <animate attributeName="fill" values="#fff;#ffeb3b;#fff" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+    
+    <path d="M12 15C11.45 15 11 15.45 11 16C11 16.55 11.45 17 12 17C12.55 17 13 16.55 13 16C13 15.45 12.55 15 12 15Z" 
+          fill="#FFF" stroke="#FFF" stroke-width="0.5">
+      <animate attributeName="fill" values="#fff;#ffeb3b;#fff" dur="0.8s" repeatCount="indefinite" begin="0.2s"/>
+    </path>
+  </g>
+  
+  <!-- Radiating warning circles -->
+  <circle cx="12" cy="12" r="10" fill="none" stroke="#FFF" stroke-width="0.5" stroke-dasharray="2,2" opacity="0">
+    <animate attributeName="r" values="10;15" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="12" cy="12" r="10" fill="none" stroke="#FFF" stroke-width="0.3" stroke-dasharray="2,2" opacity="0">
+    <animate attributeName="r" values="10;15" dur="2s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="opacity" values="0;0.3;0" dur="2s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+</svg>
               <div class="phish-block-pulse"></div>
             </div>
             <h1>Security Alert: Phishing Detected</h1>
