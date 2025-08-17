@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Real-Time Phishing Detector Ver 2",
-  "short_name": "PhishGuard",
+  "short_name": "PhishXcape ",
   "version": "1.0.0",
   "description": "Detects and blocks phishing sites in real time using Google Safe Browsing, VirusTotal, and a local ML fallback.",
   "author": "Pravin J",
@@ -40,7 +40,7 @@
       "64": "icons/icon64.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "PhishGuard",
+    "default_title": "PhishXcape ",
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
