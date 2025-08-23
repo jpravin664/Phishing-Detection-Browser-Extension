@@ -2,14 +2,16 @@
 
 <div align="center">
 
-```
+<pre style="font-size: 24px; line-height: 28px;">
+
   ____  _     _     _    __  __                    
 |  _ \| |__ (_)___| |__ \ \/ /___ __ _ _ __   ___ 
 | |_) | '_ \| / __| '_ \ \  // __/ _` | '_ \ / _ \
 |  __/| | | | \__ \ | | |/  \ (_| (_| | |_) |  __/
 |_|   |_| |_|_|___/_| |_/_/\_\___\__,_| .__/ \___|
                                       |_|         
-```
+</pre>
+
 <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=FF6B35&center=true&vCenter=true&width=600&lines=%F0%9F%9A%A8+Protect+yourself+from+malicious+websites;%E2%9A%A1+Real-time+ML-powered+detection;%F0%9F%94%92+Your+digital+safety+companion" alt="Typing SVG" />
 <br>
 
@@ -40,6 +42,8 @@
 
 
   ![PhishXcape](/Output/Result.png)  
+  <br>
+
   ![PhishXcape](/Output/Result2.png)  
 
 
