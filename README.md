@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<pre style="font-size: 24px; line-height: 28px;">
+<pre style="font-size: 30px; line-height: 35px;">
 
   ____  _     _     _    __  __                    
 |  _ \| |__ (_)___| |__ \ \/ /___ __ _ _ __   ___ 
