@@ -19,10 +19,15 @@
 </div>
 <div align="center">
   
-  ![JavaScript](https://img.shields.io/badge/Built%20With-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-  ![ML Model](https://img.shields.io/badge/ML%20Model-Random%20Forest-4CAF50?style=for-the-badge&logo=scikit-learn&logoColor=white)
-  ![Status](https://img.shields.io/badge/Status-Completed-00C853?style=for-the-badge&logo=checkmarx&logoColor=white)
+  ![JavaScript](https://img.shields.io/badge/Built_With-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
+  ![ML Model](https://img.shields.io/badge/ML_Model-Random_Forest-4CAF50?style=for-the-badge&logo=scikit-learn&logoColor=white)
+
+  ![Accuracy](https://img.shields.io/badge/Accuracy-98%25-2962FF?style=for-the-badge)
+
+  ![Precision](https://img.shields.io/badge/Precision-98%25-FF6D00?style=for-the-badge)
+
+  ![Status](https://img.shields.io/badge/Status-Completed-00C853?style=for-the-badge&logo=checkmarx&logoColor=white)
 
 </div>
 
@@ -86,6 +91,114 @@
 
 ---
 
+---
+
+## 📊 Machine Learning Model Performance
+<div align="center">
+
+# 📊 Machine Learning Model Performance
+
+<img src="https://img.shields.io/badge/Accuracy-97.99%25-00C853?style=for-the-badge&logo=checkmarx&logoColor=white" />
+<img src="https://img.shields.io/badge/Precision-98%25-2962FF?style=for-the-badge&logo=target&logoColor=white" />
+<img src="https://img.shields.io/badge/Recall-97--99%25-FF6D00?style=for-the-badge&logo=searchengin&logoColor=white" />
+<img src="https://img.shields.io/badge/F1--Score-98%25-AA00FF?style=for-the-badge&logo=databricks&logoColor=white" />
+
+<br><br>
+
+<table>
+<tr>
+<th>📌 Metric</th>
+<th>📈 Score</th>
+<th>🚀 Performance Level</th>
+</tr>
+
+<tr>
+<td><b>✅ Accuracy</b></td>
+<td><b>97.99%</b></td>
+<td>Excellent</td>
+</tr>
+
+<tr>
+<td><b>🎯 Precision</b></td>
+<td><b>98%</b></td>
+<td>Highly Reliable</td>
+</tr>
+
+<tr>
+<td><b>🔍 Recall</b></td>
+<td><b>97% – 99%</b></td>
+<td>Strong Threat Detection</td>
+</tr>
+
+<tr>
+<td><b>⚖️ F1-Score</b></td>
+<td><b>98%</b></td>
+<td>Balanced Performance</td>
+</tr>
+
+</table>
+
+<br>
+
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=18&duration=2500&pause=1000&color=00C853&center=true&vCenter=true&width=700&lines=🚀+Real-Time+Phishing+Detection+Powered+by+Machine+Learning;🛡️+97.99%25+Accurate+Threat+Detection;⚡+Fast+•+Reliable+•+Secure" />
+
+</div>
+---
+
+### 🧠 Model Details
+
+| Category | Details |
+|---|---|
+| **Algorithm** | Random Forest Classifier |
+| **Training Dataset Size** | 47,000+ URL Samples |
+| **Detection Type** | Real-Time URL-Based Phishing Detection |
+| **Deployment** | Browser Extension |
+| **Model Storage** | Serialized `.pkl` Model |
+
+---
+
+### 🔬 Extracted URL Features
+
+The model analyzes multiple URL-based characteristics to detect phishing attempts:
+
+- 🔐 HTTPS Presence
+- 📏 URL Length
+- 🌐 Subdomain Count
+- ⚠️ Special Character Count
+
+---
+
+
+### 📈 Performance Analysis
+
+- Successfully identifies the vast majority of phishing websites
+- Maintains a very low phishing miss rate
+- Optimized for fast real-time browser protection
+- Designed using a multi-layered detection architecture combining:
+  - 🧠 Machine Learning
+  - 🌐 Google Safe Browsing API
+  - 🔍 VirusTotal API
+
+---
+
+## 📷 Model Visualization Outputs
+
+<div align="center">
+
+| Visualization | Description |
+|---|---|
+| `accuracy_chart.png` | Overall model accuracy visualization |
+| `confusion_matrix.png` | Classification performance analysis |
+| `feature_importance.png` | Importance of extracted phishing features |
+
+</div>
+
+---
+
+> ⚠️ The model prioritizes minimizing missed phishing attacks while maintaining high overall accuracy and real-time performance.
+
+---
+
 ## 🧰 Tech Stack
 
 <div align="center">
@@ -139,8 +252,6 @@
 
 ## 📁 Project Structure
 
-<details>
-<summary>Click to expand</summary>
 
 ```
 Phishing Detection FINAL/
@@ -162,7 +273,7 @@ Phishing Detection FINAL/
     └── phishing_urls.csv             # Duplicate/backup dataset
 ```
 
-</details>
+
 
 ---
 
